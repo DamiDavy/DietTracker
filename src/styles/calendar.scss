@@ -1,0 +1,90 @@
+@use "header";
+
+.month-title-and-bottons-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  text-align: center;
+}
+
+.switch-month-btn {
+  font-size: 2rem;
+  color: header.$primary-color;
+  cursor: pointer;
+  border: none;
+  background-color: header.$full-opacity-color;
+}
+
+.calendar-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 0rem;
+}
+
+%month-day {
+  padding: 2.2rem 1rem;
+  text-align: center;
+  font: header.$primary-font;
+  margin: 0;
+  border: 1px solid header.$full-opacity-color;
+}
+
+@media (max-width: 700px) {
+  %month-day {
+    padding: 1.8rem 0.6rem;
+  }
+}
+
+.week-day-title {
+  @extend %month-day;
+}
+
+.day-in-month {
+  @extend %month-day;
+  position: relative;
+  border: 1px solid rgb(223, 221, 221);
+  &:hover {
+    border: 1px solid gray;
+  }
+}
+
+.day-in-month-btn {
+  background-color: header.$full-opacity-color;
+  font: header.$primary-font;
+  border: none;
+  color: header.$primary-color;
+  cursor: pointer;
+  position: absolute;
+  top: 0.1rem;
+  left: 0.1rem;
+  padding: 0.1rem 2rem 1.8rem 0.1rem;
+}
+
+.day-calorie-capacity {
+  position: absolute;
+  bottom: 0.2rem;
+  right: 0.2rem;
+  font-size: 0.8rem;
+  font-weight: bold;
+  background-color: gray;
+  color: white;
+  border: none;
+  border-radius: 10%;
+  padding: 0.2rem;
+}
+
+.green-day {
+  background-color: rgb(129, 224, 129);
+}
+.yellow-day {
+  background-color: rgb(255, 255, 134)
+}
+.orange-day {
+  background-color: rgb(255, 222, 151);
+}
+.red-day {
+  background-color: rgb(247, 159, 159);
+}
+.blue-day {
+  background-color: rgb(194, 194, 248);
+}

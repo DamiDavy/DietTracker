@@ -1,0 +1,154 @@
+@use "header";
+
+@mixin custom-margins-for-blocks {
+  margin: 0;
+  margin-left: 15%;
+}
+
+.food-basket-container {
+  border-left: header.$primary-border;
+  height: 100vh;
+  width: 90%;
+  margin: 0 auto;
+  position: relative;
+  overflow-y: auto;
+  overflow-x: hidden;
+  background-color: rgba(247, 247, 247, 0.8);
+  border-radius: 0.2rem;
+  box-shadow: header.$shadow;
+  div {
+    padding: 0.5rem;
+  }
+  h3 {
+    @include custom-margins-for-blocks();
+    margin-top: 1rem;
+  }
+  h4 {
+    @include custom-margins-for-blocks();
+    margin-bottom: 0.5rem;
+  }
+}
+
+.food-composition-indexes {
+  background-color: white;
+  width: 80%;
+  border: none;
+  border-radius: 0.2rem;
+  box-shadow: header.$shadow;
+  p, div {
+    @include custom-margins-for-blocks();
+  } 
+}
+
+@mixin flex-container {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: center;
+}
+
+.food-items-container {
+  @include flex-container();
+  background-color: rgba(51, 170, 51,  0);
+  @media (max-width: 700px) {
+    display: block;
+  }
+}
+
+@mixin item-img {
+  display: block;
+  width: 70%;
+  height: 70%;
+  object-fit: cover;
+  margin: auto auto 0.1rem;
+  border: header.$primary-border;
+  border-radius: 0.1rem;
+}
+
+%item-container {
+  border: header.$primary-border;
+  margin: 1rem;
+  min-width: 8rem;
+  width: 45%;
+  min-height: 8rem;
+}
+.item-container {
+  @extend %item-container;
+  position: relative;
+  border-radius: 0.25rem;
+  background-color: white;
+  h6 {
+    margin: 5% auto;
+    text-align: center;
+  }
+  img {
+    @include item-img();
+  }
+  @media (max-width: 700px) {
+    min-width: 75vw;
+    min-height: 50vw;
+    margin: 0.1rem auto;
+    h6 {
+      font-size: 1.2rem;
+    }
+  }
+}
+
+.item-container-empty {
+  @extend %item-container;
+  border: none;
+}
+
+@mixin delete-button {
+  font: header.$primary-font;
+  border: none;
+  background-color: rgba(51, 170, 51,  0);
+  color: header.$primary-color;
+  position: absolute;
+  top: 4%;
+  right: 4%;
+  cursor: pointer;
+}
+
+.delete-item-from-basket-button {
+  @include delete-button();
+}
+
+.hide-busket-button {
+  @include delete-button();
+  top: 0.3rem;
+  left: 0.3rem;
+  font-size: 1.5rem;
+}
+
+%item-info {
+  font: header.$primary-font;
+  font-size: 0.8rem;
+  position: absolute;
+  bottom: 2%;
+  background-color: white;
+  padding: 0.3rem;
+  border: none;
+  border-radius: 0.3rem;
+}
+
+.item-weight-info {
+  @extend %item-info;
+  left: 2%;
+}
+
+.item-calories-info {
+  @extend %item-info;
+  right: 2%;
+}
+
+.empty-basket {
+  text-align: center;
+}
+
+.link-to-choose-day-in-calendar {
+  text-decoration: underline;
+  color: header.$primary-color;
+  &:hover {
+    color: #160e15;
+    }
+}

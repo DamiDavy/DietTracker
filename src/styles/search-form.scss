@@ -1,0 +1,83 @@
+@use "header";
+@use "food-basket";
+
+$secondary-background-color: #f5f5f5;
+
+* {
+  -ms-box-sizing:content-box;
+-moz-box-sizing:content-box;
+-webkit-box-sizing:content-box; 
+box-sizing:content-box;
+}
+
+textarea:focus, input:focus{
+  outline: none;
+}
+
+.form-container {
+  margin: auto;
+  padding: 2rem;
+  padding-top: 5.5rem;
+  background-color: header.$full-opacity-color;
+  // border-bottom: header.$primary-border;
+}
+
+.food-serch-input-container {
+  width: 30rem;
+  max-width: 80%;
+  position: relative;
+  margin: auto;
+  text-align: center;
+}
+
+@mixin search-input-and-dropdown {
+  border: header.$primary-border;
+}
+
+%food-search-input-shared {
+  @include search-input-and-dropdown();
+  width: 100%;
+  height: 2rem;
+  border-radius: 0.5rem;
+  font: header.$primary-font;
+  text-align: center;
+  color: gray;
+}
+
+.food-search-input {
+  @extend %food-search-input-shared;
+  box-shadow: header.$shadow;
+}
+
+.food-search-input-with-dropdown {
+  @extend %food-search-input-shared;
+  border-bottom: none;
+  border-radius: 0.5rem 0.5rem 0 0;
+}
+
+.search-dropdown {
+  @include search-input-and-dropdown();
+  width: calc(30rem + 4px);
+  max-width: calc(100% + 4px);
+  position: absolute;
+  top: 2.2rem;
+  border-radius: 0 0 0.5rem 0.5rem;
+  background-color: white;
+  box-shadow: header.$shadow;
+}
+
+.search-result-link {
+  @include header.link;
+  padding: 0.3rem 0;
+  &:hover {
+    background-color: $secondary-background-color;
+    border-radius: 0 0 0.5rem 0.5rem;
+  }
+}
+
+.clear-input {
+  @include food-basket.delete-button();
+  top: 0.2rem;
+  right: 0.2rem;
+  font-size: 1.5rem;
+}

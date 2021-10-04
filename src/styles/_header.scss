@@ -1,0 +1,179 @@
+$primary-background-color: #f7f0f0;
+$primary-border: 0.05rem solid rgb(218, 216, 216);
+$primary-color: rgb(129, 72, 117);
+$primary-font: 1.1rem Helvetica, sans-serif;
+$full-opacity-color: rgba(117, 190, 218, 0.0);
+$shadow: 0 2px 4px 0 rgba(0,0,0,.2), 0 2.5rem 5rem 0 rgba(0,0,0,.1);
+
+@mixin link {
+  text-decoration: none;
+  display: block;
+  width: 100%;
+  height: 100%;
+  color: $primary-color;
+  &:hover {
+    color: #160e15;
+  }
+}
+
+@mixin flex-container() {
+  display: -webkit-flex;
+  display: flex;
+  align-items: center;
+}
+
+body {
+  margin: 0;
+  font: $primary-font;
+  color: $primary-color;
+}
+
+.header-container {
+  @include flex-container();
+  position: fixed;
+  width: 100%;
+  background-color: $primary-background-color;
+  border-bottom: $primary-border;
+  padding: 0.3rem 1.2rem;
+  z-index: 10;
+  box-shadow: $shadow;
+  div, h2 {
+    text-decoration: none;
+    margin: 0;
+  }
+  div:last-child {
+    margin-right: 1rem;
+    margin-left: auto; 
+  }
+  h2 {
+    margin-right: 1rem;
+  }
+  @media (max-width: 700px) {
+    flex-direction: column;
+  }
+}
+
+.auth-buttons-flex-container {
+  @include flex-container();
+  background-color: $primary-background-color;
+  padding: 0.5rem;
+  justify-content: space-around;
+  div, h2 {
+    margin: 0;
+  }
+}
+
+.header-link {
+  @include link;
+  margin-left: 0.7rem;
+  margin-right: 0.7rem;
+}
+
+.header-text {
+  margin-left: 2rem;
+}
+
+.username-in-header {
+  font-weight: bold;
+  margin-right: 1rem;
+}
+
+.kcal-in-header {
+  font-size: 0.8rem;
+  margin: 0 0.4rem;
+}
+
+@mixin button {
+  font: $primary-font;
+  color: rgba(222, 218, 224, 0.911);
+  background-color: #663e60;
+  border: none;
+  border-radius: 0.3rem;
+  cursor: pointer;
+  padding: 0.4rem 1rem;
+  margin-right: 2rem;
+}
+
+.logout-button {
+  @include button;
+}
+
+@media (max-width: 700px) { 
+  .link-visible-for-wide, .auth-buttons-flex-container, .invisible-on-small-screens {
+    display: none;
+  }
+  .toggle-basket-button, .toggle-menu-btn {
+    font-size: 1.5rem;
+    margin-right: 1rem;
+    position: relative; 
+    height: 0; 
+    width: 1.5rem; 
+    padding: 0;
+    padding-bottom: 1.5rem;
+    svg {
+      position: absolute; 
+      height: 100%; 
+      width: 100%; 
+      left: 0; 
+      top: 0;
+    }
+  }
+}
+
+@media (min-width: 701px) { 
+  .toggle-basket-button, .toggle-menu-btn {
+    display: none;
+  }
+}
+
+.flex-for-small {
+  display: flex;
+  justify-content: space-around;
+  div:last-child {
+    margin-right: 4rem;
+    margin-left: auto; 
+  }
+  @media (max-width: 700px) {
+    width: 100%;
+    border-bottom: 1 px solid rgb(129, 72, 117);
+  }
+}
+
+.link-visible-for-wide {
+  position: relative;
+  @media (max-width: 700px) {
+    width: 50%;
+    margin-left:auto;
+    padding-top: 0.5rem;
+    border-bottom: 1px solid rgb(184, 178, 178);
+  }
+}
+
+.basket-foods-number {
+  position: absolute;
+  right: 0%;
+  font: $primary-font;
+  font-size: 0.6rem;
+  font-weight: bolder;
+  padding: 0.2rem;
+  border: none;
+  border-radius: 30%;
+  background-color: #572229;
+  color: whitesmoke;
+  z-index: 4;
+  @media (min-width: 701px) { 
+    right: 5%;
+  }
+}
+
+.cover-for-dropdown-closing-onclick {
+  background-color: rgba(222, 218, 224, 0.555);
+  position: absolute;
+  display: none;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  min-height: 100vh;
+  min-width: 100vw;
+}

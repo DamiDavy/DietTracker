@@ -1,0 +1,54 @@
+@use "header";
+
+.flex-cont-for-main-and-basket {
+  @include header.flex-container;
+  width: 100%;
+  main {
+    flex: 3;
+  }
+  aside {
+    flex: 1;
+  }
+}
+
+@media (max-width: 700px) { 
+  .flex-cont-for-main-and-basket {
+    display: block;
+    width: 100%;
+    main {
+      display: block;
+    }
+    aside {
+      display: none;
+    }
+  }
+}
+
+.back-img {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  z-index: -2;
+  object-fit: cover;
+}
+
+.background-opacity {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+  background-color: whitesmoke;
+  opacity: 0.7;
+}
+
+.main-app-container {
+  position: relative;
+}
+
+.footer {
+  position: absolute;
+  bottom: 1rem;
+  left: 3rem;
+  color: #663e60;
+  font-size: 0.9rem;
+}
