@@ -65,7 +65,7 @@ export default function (state = initialState, action) {
 export const loadUser = () => (dispatch, getState) => {
   dispatch({ type: USER_LOADING })
 
-  axios.get('/api/auth/user', addHeaderWithToken(getState))
+  axios.get('http://127.0.0.1:8000/api/auth/user', addHeaderWithToken(getState))
     .then(res => {
       dispatch({
         type: USER_LOADED,
@@ -85,7 +85,7 @@ export const loginUser = (username, password) => dispatch => {
   }
   const body = JSON.stringify({ username, password })
 
-  axios.post('/api/auth/login', body, config)
+  axios.post('http://127.0.0.1:8000/api/auth/login', body, config)
     .then(res => {
       dispatch({
         type: SET_MESSAGE,
@@ -104,7 +104,7 @@ export const loginUser = (username, password) => dispatch => {
 
 export const logoutUser = () => (dispatch, getState) => {
 
-  axios.post('/api/auth/logout', null, addHeaderWithToken(getState))
+  axios.post('http://127.0.0.1:8000/api/auth/logout', null, addHeaderWithToken(getState))
     .then(() => {
       dispatch({
         type: SET_MESSAGE,
@@ -128,7 +128,7 @@ export const registerUser = (username, email, password) => dispatch => {
   }
   const body = JSON.stringify({ username, email, password })
 
-  axios.post('/api/auth/register', body, config)
+  axios.post('http://127.0.0.1:8000/api/auth/register', body, config)
     .then(res => {
       dispatch({
         type: SET_MESSAGE,

@@ -29,7 +29,7 @@ export const clearRecomendedIntake = () => ({ type: CLEAR_RECOMMENDED_INTAKE })
 
 export const getUserRecomendedIntakeThunk = () => (dispatch, getState) => {
   const username = getState().auth.user.username
-  axios.get(`/api/daily-calorie-intake?search=${username}`, addHeaderWithToken(getState))
+  axios.get(`http://127.0.0.1:8000/api/daily-calorie-intake?search=${username}`, addHeaderWithToken(getState))
     .then(res => {
       if (res.data.length !== 0) {
         dispatch({
@@ -48,7 +48,7 @@ export const createOrUpdateUserRecomendedIntakeThunk = (daily_calorie_intake) =>
   const body = { username, daily_calorie_intake }
   if (getState().intake.exists) {
     const intakeId = getState().intake.intake.id
-    axios.put(`/api/daily-calorie-intake/${intakeId}/`, body, addHeaderWithToken(getState))
+    axios.put(`http://127.0.0.1:8000/api/daily-calorie-intake/${intakeId}/`, body, addHeaderWithToken(getState))
       .then(res => {
         dispatch(createSuccessMessage('Recomended Calorie Input Was Updated'))
         dispatch({
@@ -61,7 +61,7 @@ export const createOrUpdateUserRecomendedIntakeThunk = (daily_calorie_intake) =>
       })
   }
   else {
-    axios.post(`/api/daily-calorie-intake/`, body, addHeaderWithToken(getState))
+    axios.post(`http://127.0.0.1:8000/api/daily-calorie-intake/`, body, addHeaderWithToken(getState))
       .then(res => {
         dispatch(createSuccessMessage('Recomended Calorie Input Was Created'))
         dispatch({

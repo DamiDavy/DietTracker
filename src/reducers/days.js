@@ -96,7 +96,7 @@ export const createOrGetDay = (day, month, year) => (dispatch, getState) => {
   const userId = getState().auth.user.id
   const body = { user: userId, day, month, year }
 
-  axios.post('/api/days/', body, addHeaderWithToken(getState))
+  axios.post('http://127.0.0.1:8000/api/days/', body, addHeaderWithToken(getState))
     .then(res => {
       dispatch({
         type: SET_DAY_TO_ADD_FOOD_IN,
@@ -110,7 +110,7 @@ export const createOrGetDay = (day, month, year) => (dispatch, getState) => {
 
 export const searchDays = (year, month) => (dispatch, getState) => {
   axios
-    .get(`/api/days?year=${year}&month=${month}`, addHeaderWithToken(getState))
+    .get(`http://127.0.0.1:8000/api/days?year=${year}&month=${month}`, addHeaderWithToken(getState))
     .then(res => {
       dispatch({
         type: GET_DAYS,
