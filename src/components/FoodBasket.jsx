@@ -117,7 +117,7 @@ export function FoodBasket({ aside, main }) {
           </div>
         </div>) : <div className="empty-basket">
           <p>No foods in basket</p>
-          {isAuth ? <p>Please, select the date in <Link onClick={hideBasketOnSmallScreen}
+          {(isAuth && !basketDate) ? <p>Please, select the date in <Link onClick={hideBasketOnSmallScreen}
             to="/app/days" className="link-to-choose-day-in-calendar">Calendar</Link>
           </p> : null}
         </div>}

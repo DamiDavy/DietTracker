@@ -137,7 +137,7 @@ export const deleteFoodFromBasketThunk = (id, date) => (dispatch, getState) => {
   const foodItemsToDelete = foodsForDay.filter(item => item.food === id)
   let allDeleted = true
   foodItemsToDelete.forEach(item => {
-    axios.delete(`http://127.0.0.1:8000/api/food-items/${item.id}`, addHeaderWithToken(getState))
+    axios.delete(`https://caloriecounterapi.herokuapp.com/api/food-items/${item.id}`, addHeaderWithToken(getState))
       .then(() => {
         dispatch(createSuccessMessage('Food Item Was Deleted From Basket'))
       })
@@ -158,7 +158,7 @@ export const clearCurrentMonthInfoInFoods = () => ({ type: CLEAR_FOOD_STATE })
 export const setCalorieContent = (date) => (dispatch, getState) => {
   const foodItems = getState().foods[`${date.day}-${date.month}`]
   foodItems.forEach(item => {
-    axios.get(`http://127.0.0.1:8000/api/foods/${item.food}`)
+    axios.get(`https://caloriecounterapi.herokuapp.com/api/foods/${item.food}`)
       .then(res => {
         dispatch({
           type: SET_CALORIE_CAPACITY,
@@ -181,7 +181,7 @@ export const addFoodToBasket = (food, weigthFactor) => ({
 })
 
 export const addFoodToBasketFromDayState = (food, weigthFactor) => dispatch => {
-  axios.get(`http://127.0.0.1:8000/api/foods/${food}`)
+  axios.get(`https://caloriecounterapi.herokuapp.com/api/foods/${food}`)
     .then(res => {
       dispatch({
         type: ADD_FOOD_TO_BASKET,
@@ -200,7 +200,7 @@ export const addFoodToBasketThunk = (food, weight) => (dispatch, getState) => {
   const date = getState().days.dayToAddFoodIn.id
   const body = { date, food: food.id, weight, date_for_search: date.toString() }
   axios
-    .post('http://127.0.0.1:8000/api/food-items/', body, addHeaderWithToken(getState))
+    .post('https://caloriecounterapi.herokuapp.com/api/food-items/', body, addHeaderWithToken(getState))
     .then(() => {
       dispatch(createSuccessMessage('Food Item Was Added To Basket'))
       dispatch(addFoodToBasket(food, weight / 100))
@@ -217,7 +217,7 @@ export const toggleDropdownVisibility = (bool) => ({
 
 export const getCategories = () => dispatch => {
   axios
-    .get('http://127.0.0.1:8000/api/categories/')
+    .get('https://caloriecounterapi.herokuapp.com/api/categories/')
     .then(res => {
       dispatch({
         type: GET_CATEGORIES,
@@ -231,7 +231,7 @@ export const getCategories = () => dispatch => {
 
 export const getUserFoodItems = (date) => (dispatch, getState) => {
   axios
-    .get(`http://127.0.0.1:8000/api/food-items?search=${date.id}`, addHeaderWithToken(getState))
+    .get(`https://caloriecounterapi.herokuapp.com/api/food-items?search=${date.id}`, addHeaderWithToken(getState))
     .then(res => {
       dispatch({
         type: CREATE_DAY_BASKET,
@@ -248,7 +248,7 @@ export const getUserFoodItems = (date) => (dispatch, getState) => {
 
 export const foodsSearch = title => dispatch => {
   axios
-    .get(`http://127.0.0.1:8000/api/foods?search=${title}`)
+    .get(`https://caloriecounterapi.herokuapp.com/api/foods?search=${title}`)
     .then(res => {
       dispatch({
         type: GET_FOODS,
