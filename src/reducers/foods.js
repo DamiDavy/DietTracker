@@ -9,6 +9,7 @@ const GET_CATEGORIES = 'GET_CATEGORIES'
 const ADD_FOOD_TO_BASKET = 'ADD_FOOD_TO_BASKET'
 const TOGGLE_DROPDOWN_VISIBILITY = 'TOGGLE_DROPDOWN_VISIBILITY'
 const CREATE_DAY_BASKET = 'CREATE_DAY_BASKET'
+const CREATE_EMPTY_DAY_BASKET = 'CREATE_EMPTY_DAY_BASKET'
 const SET_CALORIE_CAPACITY = 'SET_CALORIE_CAPACITY'
 const NULL_CALORIE_CAPACITY = 'NULL_CALORIE_CAPACITY'
 
@@ -81,6 +82,10 @@ export default function (state = initialState, action) {
         ...state,
         [`${action.date.day}-${action.date.month}`]: action.payload
       }
+    case CREATE_EMPTY_DAY_BASKET:
+      if (!state[`${action.date.day}-${action.date.month}`]) {
+        state[`${action.date.day}-${action.date.month}`] = []
+      }
     case GET_FOODS:
       return {
         ...state,
@@ -92,7 +97,6 @@ export default function (state = initialState, action) {
         categories: action.payload
       }
     case ADD_FOOD_TO_BASKET:
-      console.log(action.payload.food.title, action.payload.weigthFactor)
       const product = state.foodBasket.find(product => product.food.title === action.payload.food.title)
 
       if (product !== undefined) {
@@ -238,7 +242,7 @@ export const getUserFoodItems = (date) => (dispatch, getState) => {
         type: CREATE_DAY_BASKET,
         payload: res.data,
         date,
-        month: date.month
+        // month: date.month
       })
       dispatch(setCalorieContent(date))
     })
@@ -246,6 +250,11 @@ export const getUserFoodItems = (date) => (dispatch, getState) => {
       dispatch(errorAC("There Was An Error", error.response.status))
     })
 }
+
+export const createEmptyDayBasket = (date) => ({
+  type: CREATE_EMPTY_DAY_BASKET,
+  date
+})
 
 export const foodsSearch = title => dispatch => {
   axios

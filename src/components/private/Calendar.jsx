@@ -4,7 +4,7 @@ import { v4 as uuidv4 } from 'uuid'
 import { useDispatch, useSelector } from 'react-redux'
 import { clearCurrentMonthInfoInDays, createOrGetDay, searchDays, setCalendarIsRendered } from '../../reducers/days'
 import { Day } from './Day'
-import { clearCurrentMonthInfoInFoods, clearFoodBusket } from '../../reducers/foods'
+import { clearCurrentMonthInfoInFoods, clearFoodBusket, createEmptyDayBasket } from '../../reducers/foods'
 import '../../styles/calendar.scss'
 
 const weekDays = ['mo', 'tu', 'we', 'th', 'fr', 'sa', 'su']
@@ -52,6 +52,7 @@ export function Calendar({ aside, main }) {
 
   function showBasket(day, month, year) {
     dispatch(createOrGetDay(day, month, year))
+    dispatch(createEmptyDayBasket({ day, month }))
     dispatch(clearFoodBusket())
     aside.current.style.display = 'block';
     if (window.innerWidth <= 700) {

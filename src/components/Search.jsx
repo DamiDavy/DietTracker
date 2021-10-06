@@ -9,7 +9,8 @@ export function Search({ aside, main }) {
   const [title, setTitle] = useState('')
 
   const foods = useSelector(state => state.foods.foods)
-  const dropDownIsVisible = useSelector(state => state.foods.dropDownIsVisible) && foods.length
+  const dropDownIsVisible = useSelector(state => state.foods.dropDownIsVisible)
+    && (foods && foods.length)
 
   const dispatch = useDispatch()
   function showResultsDropDown() {
