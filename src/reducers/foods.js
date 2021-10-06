@@ -92,6 +92,7 @@ export default function (state = initialState, action) {
         categories: action.payload
       }
     case ADD_FOOD_TO_BASKET:
+      console.log(action.payload.food.title, action.payload.weigthFactor)
       const product = state.foodBasket.find(product => product.food.title === action.payload.food.title)
 
       if (product !== undefined) {
