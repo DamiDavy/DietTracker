@@ -77,37 +77,39 @@ export function FoodBasket({ aside, main }) {
 
   return (
     <div className="food-basket-container">
-      <h3>Food Basket</h3>
-      <h4>{basketDateInformat}</h4>
-      <div className="food-composition-indexes">
-        <p>Calories:
-          {Math.round(basket.reduce(nutrientsAndCaloriesSum('calorie'), 0))}kcal</p>
-        {/* basket.length > 0 ? basket.length === 1 ? */}
-        {/* Math.round(basket[0].food.calorie_content * +basket[0].weigthFactor) : */}
-        {/* Math.round(basket.reduce(nutrientsAndCaloriesSum('calorie'))) : 0} kcal */}
-        <p>Protein:
-          {basket.reduce(nutrientsAndCaloriesSum('protein'), 0).toFixed(1)}g</p>
-        {/* {basket.length > 0 ? basket.length === 1 ?
+      <div className="basket-indexes-and-date-container-sticky">
+        <h3>Food Basket</h3>
+        <h4>{basketDateInformat}</h4>
+        <div className="food-composition-indexes">
+          <p>Calories:
+            {Math.round(basket.reduce(nutrientsAndCaloriesSum('calorie'), 0))}kcal</p>
+          {/* basket.length > 0 ? basket.length === 1 ? */}
+          {/* Math.round(basket[0].food.calorie_content * +basket[0].weigthFactor) : */}
+          {/* Math.round(basket.reduce(nutrientsAndCaloriesSum('calorie'))) : 0} kcal */}
+          <p>Protein:
+            {basket.reduce(nutrientsAndCaloriesSum('protein'), 0).toFixed(1)}g</p>
+          {/* {basket.length > 0 ? basket.length === 1 ?
             basket[0].food.protein_content * +basket[0].weigthFactor.toFixed(1) :
             basket.reduce(nutrientsAndCaloriesSum('protein')).toFixed(1) : 0} g */}
-        <p>Fat:
-          {basket.reduce(nutrientsAndCaloriesSum('fat'), 0).toFixed(1)}g</p>
-        {/* {basket.length > 0 ? basket.length === 1 ?
+          <p>Fat:
+            {basket.reduce(nutrientsAndCaloriesSum('fat'), 0).toFixed(1)}g</p>
+          {/* {basket.length > 0 ? basket.length === 1 ?
             (basket[0].food.fat_content * +basket[0].weigthFactor).toFixed(1) :
             basket.reduce(nutrientsAndCaloriesSum('fat')).toFixed(1) : 0} g */}
-        <p>Carbohydrate:
-          {basket.reduce(nutrientsAndCaloriesSum('carbohydrate'), 0).toFixed(1)}g</p>
-        {/* {basket.length > 0 ? basket.length === 1 ?
+          <p>Carbohydrate:
+            {basket.reduce(nutrientsAndCaloriesSum('carbohydrate'), 0).toFixed(1)}g</p>
+          {/* {basket.length > 0 ? basket.length === 1 ?
             (basket[0].food.carbohydrate_content * +basket[0].weigthFactor).toFixed(1) :
             basket.reduce(nutrientsAndCaloriesSum('carbohydrate')).toFixed(1) : 0} g */}
-        <p>Weigth:
-          {Math.round(basket.reduce((a, b) => a + (b.weigthFactor * 100), 0))}g</p>
-        {/* {basket.length > 0 ? basket.length === 1 ?
+          <p>Weigth:
+            {Math.round(basket.reduce((a, b) => a + (b.weigthFactor * 100), 0))}g</p>
+          {/* {basket.length > 0 ? basket.length === 1 ?
             Math.round(basket[0].weigthFactor * 100) :
             Math.round(basket.reduce((a, b) => a.weigthFactor * 100 + b.weigthFactor * 100)) : 0} g */}
 
-        <button className="hide-busket-button"
-          onClick={() => toggleBusketVisibility(aside, main)}>&#215;</button>
+          <button className="hide-busket-button"
+            onClick={() => toggleBusketVisibility(aside, main)}>&#215;</button>
+        </div>
       </div>
       <div className="food-items-container">
         {basket.length !== 0 ? basket.map(product => <div className="item-container" key={product.food.id}>
