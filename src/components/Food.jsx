@@ -3,7 +3,8 @@ import { useDispatch, useSelector } from 'react-redux'
 import { useHistory, useParams } from 'react-router'
 import { deleteDayFromLoaded } from '../reducers/days'
 import preloader from '../assets/preloader.gif'
-import { addFoodToBasket, foodsSearch, addFoodToBasketThunk, clearDayCalorieCapacity, updateDayCalorieContent, getUserFoodItems, cleanDayCalorieContent, setCalorieContent } from '../reducers/foods'
+import { addFoodToBasket, addFoodToBasketThunk, getUserFoodItems, cleanDayCalorieContent } from '../reducers/foods'
+import { foodsSearch } from '../reducers/search'
 
 export function Food({ aside, main }) {
 
@@ -20,10 +21,10 @@ export function Food({ aside, main }) {
     dispatch(foodsSearch(foodParam))
   }, [])
 
-  const food = useSelector(state => state.foods.foods[0])
+  const food = useSelector(state => state.search.foods[0])
   const isAuth = useSelector(state => state.auth.isAuth)
 
-  const isLoading = useSelector(state => state.foods.isLoading)
+  const isLoading = useSelector(state => state.search.foodIssLoading)
 
   let history = useHistory();
 

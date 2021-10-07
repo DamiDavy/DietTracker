@@ -1,15 +1,15 @@
 import React, { useEffect } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
+import { shallowEqual, useDispatch, useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
 import { getCategories } from '../reducers/foods'
 import '../styles/categories-and-foods.scss';
 import preloader from '../assets/preloader.gif'
 
-export default function Categories() {
+export const Categories = React.memo(function Categories() {
 
   const dispatch = useDispatch()
 
-  const categories = useSelector(state => state.foods.categories)
+  const categories = useSelector(state => state.foods.categories, shallowEqual)
 
   useEffect(() => {
     dispatch(getCategories())
@@ -33,4 +33,4 @@ export default function Categories() {
       </div>
     </div >
   )
-}
+})

@@ -1,14 +1,11 @@
 import axios from 'axios'
 import { addHeaderWithToken } from './auth'
-
 import { errorAC, GET_ERRORS } from './errors'
 import { createSuccessMessage, SET_MESSAGE } from './success'
 
 const FOODS_LOADING = 'FOODS_LOADING'
-const GET_FOODS = 'GET_FOODS'
 const GET_CATEGORIES = 'GET_CATEGORIES'
 const ADD_FOOD_TO_BASKET = 'ADD_FOOD_TO_BASKET'
-const TOGGLE_DROPDOWN_VISIBILITY = 'TOGGLE_DROPDOWN_VISIBILITY'
 const CREATE_DAY_BASKET = 'CREATE_DAY_BASKET'
 const CREATE_EMPTY_DAY_BASKET = 'CREATE_EMPTY_DAY_BASKET'
 const SET_CALORIE_CAPACITY = 'SET_CALORIE_CAPACITY'
@@ -22,10 +19,8 @@ export const DROP_FOODS_STATE_ON_LOGOUT = 'DROP_FOODS_STATE_ON_LOGOUT'
 
 const initialState = {
   isLoading: false,
-  foods: [],
   categories: [],
   foodBasket: [],
-  dropDownIsVisible: false,
   calories: {}
 }
 
@@ -52,11 +47,6 @@ export default function (state = initialState, action) {
       return {
         ...initialState,
         foodBasket: [...state.foodBasket]
-      }
-    case TOGGLE_DROPDOWN_VISIBILITY:
-      return {
-        ...state,
-        dropDownIsVisible: action.payload
       }
     case NULL_CALORIE_CAPACITY:
       return {
@@ -92,12 +82,6 @@ export default function (state = initialState, action) {
     case CREATE_EMPTY_DAY_BASKET:
       if (!state[`${action.date.day}-${action.date.month}`]) {
         state[`${action.date.day}-${action.date.month}`] = []
-      }
-    case GET_FOODS:
-      return {
-        ...state,
-        isLoading: false,
-        foods: action.payload
       }
     case GET_CATEGORIES:
       return {
@@ -224,11 +208,6 @@ export const addFoodToBasketThunk = (food, weight) => (dispatch, getState) => {
     });
 }
 
-export const toggleDropdownVisibility = (bool) => ({
-  type: TOGGLE_DROPDOWN_VISIBILITY,
-  payload: bool
-})
-
 export const getCategories = () => dispatch => {
   dispatch({ type: FOODS_LOADING })
   axios
@@ -265,18 +244,3 @@ export const createEmptyDayBasket = (date) => ({
   type: CREATE_EMPTY_DAY_BASKET,
   date
 })
-
-export const foodsSearch = title => dispatch => {
-  dispatch({ type: FOODS_LOADING })
-  axios
-    .get(`https://caloriecounterapi.herokuapp.com/api/foods?search=${title}`)
-    .then(res => {
-      dispatch({
-        type: GET_FOODS,
-        payload: res.data
-      })
-    })
-    .catch(error => {
-      dispatch(errorAC(error.toJSON().message, error.response.status))
-    });
-}

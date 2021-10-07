@@ -2,14 +2,14 @@ import React, { useState } from 'react'
 import { useSelector } from 'react-redux';
 import { useDispatch } from 'react-redux'
 import { Link } from 'react-router-dom';
-import { foodsSearch, toggleDropdownVisibility } from '../reducers/foods'
+import { foodsSearch, toggleDropdownVisibility } from '../reducers/search'
 import '../styles/search-form.scss';
 
 export function Search({ aside, main }) {
   const [title, setTitle] = useState('')
 
-  const foods = useSelector(state => state.foods.foods)
-  const dropDownIsVisible = useSelector(state => state.foods.dropDownIsVisible)
+  const foods = useSelector(state => state.search.foods)
+  const dropDownIsVisible = useSelector(state => state.search.dropDownIsVisible)
     && (foods && foods.length)
 
   const dispatch = useDispatch()
