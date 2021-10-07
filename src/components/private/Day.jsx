@@ -62,7 +62,9 @@ export function Day({ num, days, showBasket, month, year }) {
         onClick={() => showBasket(num, monthInFormat(month), year)}>
         <span>{num}</span>
       </button>
-      {calorieCapacity > 0 ? <span className="day-calorie-capacity">{Math.round(calorieCapacity)}</span> : null}
+      {calorieCapacity > 0 ? <span className="day-calorie-capacity">
+        {Math.round(calorieCapacity)}
+      </span> : null}
     </div >
   )
 }

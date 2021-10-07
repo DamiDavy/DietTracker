@@ -18,6 +18,7 @@ import { toggleDropdownVisibility } from '../reducers/foods'
 import { CalorieIntake } from './CalorieIntake'
 import '../styles/app.scss';
 import foodsimg from '../assets/vegetables.jpg'
+import { NotFound } from './NotFound'
 
 export function App() {
 
@@ -75,13 +76,14 @@ export function App() {
             <Route exact path="/app/calorie-intake" component={CalorieIntake} />
             <Route exact path="/app/login" component={Login} />
             <Route exact path="/app/register" component={Register} />
+            <Route component={NotFound} />
           </Switch>
         </main>
         <aside ref={aside}>
           <FoodBasket aside={aside} main={main} />
         </aside>
       </div>
-      <footer className="footer">by LexLex</footer>
+      <footer className="footer"><div className="footer-text">by DamiDami</div></footer>
     </div >
   )
 }

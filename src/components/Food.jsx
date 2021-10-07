@@ -2,6 +2,7 @@ import React, { useEffect, useMemo, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useHistory, useParams } from 'react-router'
 import { deleteDayFromLoaded } from '../reducers/days'
+import preloader from '../assets/preloader.gif'
 import { addFoodToBasket, foodsSearch, addFoodToBasketThunk, clearDayCalorieCapacity, updateDayCalorieContent, getUserFoodItems, cleanDayCalorieContent, setCalorieContent } from '../reducers/foods'
 
 export function Food({ aside, main }) {
@@ -21,6 +22,8 @@ export function Food({ aside, main }) {
 
   const food = useSelector(state => state.foods.foods[0])
   const isAuth = useSelector(state => state.auth.isAuth)
+
+  const isLoading = useSelector(state => state.foods.isLoading)
 
   let history = useHistory();
 
@@ -50,21 +53,22 @@ export function Food({ aside, main }) {
   return (
     <div className="route-container">
       <div className="unified-container">
-        <h2>{food.title}</h2>
-        <img className="detail-food-info-img" src={food.image} />
-        <pre>{`
+        {isLoading ? <img className="animated-gif" src={preloader} /> : <>
+          <h2>{food.title}</h2>
+          <img className="detail-food-info-img" src={food.image} />
+          <pre>{`
 ${Math.round(food.calorie_content * weigthFactor)} calories
 ${Math.round(food.protein_content * weigthFactor)} protein
 ${Math.round(food.fat_content * weigthFactor)} fat
 ${Math.round(food.carbohydrate_content * weigthFactor)} carbohydrate`}
-        </pre>
-        <div className="food-weight-form-container">
-          <input type="number" value={weight}
-            className="weight-input" onChange={e => setWeight(e.target.value)} /><span>g</span>
-          <div className="btn-container" >
-            <button className="add-food-btn" onClick={() => addToBasket(food, weigthFactor)}>Add To Basket</button>
-          </div>
-        </div>
+          </pre>
+          <div className="food-weight-form-container">
+            <input type="number" value={weight}
+              className="weight-input" onChange={e => setWeight(e.target.value)} /><span>g</span>
+            <div className="btn-container" >
+              <button className="add-food-btn" onClick={() => addToBasket(food, weigthFactor)}>Add To Basket</button>
+            </div>
+          </div></>}
       </div>
     </div>
   )

@@ -124,7 +124,7 @@ export function Header({ aside, main }) {
           onClick={closeBaskeAndHeaderDropDown}>Diary</Link>
       </div>
       <div>
-        <Link className="header-link link-visible-for-wide" to="/app/calorie-intake" ref={intakeLink}
+        <Link className="header-link link-visible-for-wide" to="/app/calorie-intak" ref={intakeLink}
           onClick={closeBaskeAndHeaderDropDown}>Calorie Intake</Link>
       </div>
 

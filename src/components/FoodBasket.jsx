@@ -57,15 +57,19 @@ export function FoodBasket({ aside, main }) {
     }
   }, [basketDate])
 
-  function deleteFood(id) {
-    if (isAuth && basketDate) {
-      dispatch(deleteFoodFromBasketThunk(id, basketDate))
-      dispatch(deleteFoodFromBasketDay(id, basketDate))
-      dispatch(cleanDayCalorieContent(basketDate))
-      dispatch(setCalorieContent(basketDate))
-    } else {
-      dispatch(deleteFoodFromBasket(id))
-    }
+  function deleteFood(id, element) {
+    console.log(element.parentElement)
+    element.parentElement.style.animationPlayState = 'running'
+    setTimeout(() => {
+      if (isAuth && basketDate) {
+        dispatch(deleteFoodFromBasketThunk(id, basketDate))
+        dispatch(deleteFoodFromBasketDay(id, basketDate))
+        dispatch(cleanDayCalorieContent(basketDate))
+        dispatch(setCalorieContent(basketDate))
+      } else {
+        dispatch(deleteFoodFromBasket(id))
+      }
+    }, 2000)
   }
 
   function hideBasketOnSmallScreen() {
@@ -81,28 +85,23 @@ export function FoodBasket({ aside, main }) {
         <h3>Food Basket</h3>
         <h4>{basketDateInformat}</h4>
         <div className="food-composition-indexes">
-          <p>Calories:
-            {Math.round(basket.reduce(nutrientsAndCaloriesSum('calorie'), 0))}kcal</p>
+          <p>Calories: {Math.round(basket.reduce(nutrientsAndCaloriesSum('calorie'), 0))}kcal</p>
           {/* basket.length > 0 ? basket.length === 1 ? */}
           {/* Math.round(basket[0].food.calorie_content * +basket[0].weigthFactor) : */}
           {/* Math.round(basket.reduce(nutrientsAndCaloriesSum('calorie'))) : 0} kcal */}
-          <p>Protein:
-            {basket.reduce(nutrientsAndCaloriesSum('protein'), 0).toFixed(1)}g</p>
+          <p>Protein: {basket.reduce(nutrientsAndCaloriesSum('protein'), 0).toFixed(1)}g</p>
           {/* {basket.length > 0 ? basket.length === 1 ?
             basket[0].food.protein_content * +basket[0].weigthFactor.toFixed(1) :
             basket.reduce(nutrientsAndCaloriesSum('protein')).toFixed(1) : 0} g */}
-          <p>Fat:
-            {basket.reduce(nutrientsAndCaloriesSum('fat'), 0).toFixed(1)}g</p>
+          <p>Fat: {basket.reduce(nutrientsAndCaloriesSum('fat'), 0).toFixed(1)}g</p>
           {/* {basket.length > 0 ? basket.length === 1 ?
             (basket[0].food.fat_content * +basket[0].weigthFactor).toFixed(1) :
             basket.reduce(nutrientsAndCaloriesSum('fat')).toFixed(1) : 0} g */}
-          <p>Carbohydrate:
-            {basket.reduce(nutrientsAndCaloriesSum('carbohydrate'), 0).toFixed(1)}g</p>
+          <p>Carbohydrate: {basket.reduce(nutrientsAndCaloriesSum('carbohydrate'), 0).toFixed(1)}g</p>
           {/* {basket.length > 0 ? basket.length === 1 ?
             (basket[0].food.carbohydrate_content * +basket[0].weigthFactor).toFixed(1) :
             basket.reduce(nutrientsAndCaloriesSum('carbohydrate')).toFixed(1) : 0} g */}
-          <p>Weigth:
-            {Math.round(basket.reduce((a, b) => a + (b.weigthFactor * 100), 0))}g</p>
+          <p>Weigth: {Math.round(basket.reduce((a, b) => a + (b.weigthFactor * 100), 0))}g</p>
           {/* {basket.length > 0 ? basket.length === 1 ?
             Math.round(basket[0].weigthFactor * 100) :
             Math.round(basket.reduce((a, b) => a.weigthFactor * 100 + b.weigthFactor * 100)) : 0} g */}
@@ -112,16 +111,17 @@ export function FoodBasket({ aside, main }) {
         </div>
       </div>
       <div className="food-items-container">
-        {basket.length !== 0 ? basket.map(product => <div className="item-container" key={product.food.id}>
-          <h6>{product.food.title}</h6>
-          <img src={product.food.image} />
-          <button className="delete-item-from-basket-button"
-            onClick={() => deleteFood(product.food.id)}>&#215;</button>
-          <div className="item-weight-info">{Math.round(product.weigthFactor * 100)}g</div>
-          <div className="item-calories-info">
-            {Math.round(product.weigthFactor * product.food.calorie_content)}kcal
-          </div>
-        </div>) : <div className="empty-basket">
+        {basket.length !== 0 ? basket.map(product =>
+          <div className="item-container" key={product.food.id}>
+            <h6>{product.food.title}</h6>
+            <img src={product.food.image} />
+            <button className="delete-item-from-basket-button"
+              onClick={e => deleteFood(product.food.id, e.target)}>&#215;</button>
+            <div className="item-weight-info">{Math.round(product.weigthFactor * 100)}g</div>
+            <div className="item-calories-info">
+              {Math.round(product.weigthFactor * product.food.calorie_content)}kcal
+            </div>
+          </div>) : <div className="empty-basket">
           <p>No foods in basket</p>
           {(isAuth && !basketDate) ? <p>Please, select the date in <Link onClick={hideBasketOnSmallScreen}
             to="/app/days" className="link-to-choose-day-in-calendar">Calendar</Link>

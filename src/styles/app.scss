@@ -46,9 +46,15 @@
 }
 
 .footer {
+  position: relative;
+  height: 2rem;
+}
+
+.footer-text {
   position: absolute;
-  bottom: 1rem;
-  left: 3rem;
+  bottom: 0.2rem;
+  left: 1rem;
   color: #663e60;
   font-size: 0.9rem;
+  font-weight: bolder;
 }

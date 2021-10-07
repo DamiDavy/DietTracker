@@ -28,7 +28,7 @@
 .unified-container {
   @include main-container();
   width: 33rem;
-  max-width: 100%;
+  max-width: 85%;
   padding: 2rem;
   pre {
     display: block;
@@ -159,4 +159,10 @@ input[type='radio']:checked:after {
   max-width: 80%;
   height: 16rem;
   padding: 0;
+}
+
+.container-for-not-found {
+  h1, h4, div {
+    text-align: center;
+  }
 }

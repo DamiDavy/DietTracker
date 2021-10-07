@@ -4,6 +4,7 @@ import { addHeaderWithToken } from './auth'
 import { errorAC, GET_ERRORS } from './errors'
 import { createSuccessMessage, SET_MESSAGE } from './success'
 
+const FOODS_LOADING = 'FOODS_LOADING'
 const GET_FOODS = 'GET_FOODS'
 const GET_CATEGORIES = 'GET_CATEGORIES'
 const ADD_FOOD_TO_BASKET = 'ADD_FOOD_TO_BASKET'
@@ -20,6 +21,7 @@ const DELETE_FOOD_FROM_DAY_BASKET = 'DELETE_FOOD_FROM_DAY_BASKET'
 export const DROP_FOODS_STATE_ON_LOGOUT = 'DROP_FOODS_STATE_ON_LOGOUT'
 
 const initialState = {
+  isLoading: false,
   foods: [],
   categories: [],
   foodBasket: [],
@@ -29,6 +31,11 @@ const initialState = {
 
 export default function (state = initialState, action) {
   switch (action.type) {
+    case FOODS_LOADING:
+      return {
+        ...state,
+        isLoading: true,
+      }
     case DROP_FOODS_STATE_ON_LOGOUT:
       return initialState
     case DELETE_FOOD_FROM_BASKET:
@@ -89,11 +96,13 @@ export default function (state = initialState, action) {
     case GET_FOODS:
       return {
         ...state,
+        isLoading: false,
         foods: action.payload
       }
     case GET_CATEGORIES:
       return {
         ...state,
+        isLoading: false,
         categories: action.payload
       }
     case ADD_FOOD_TO_BASKET:
@@ -221,6 +230,7 @@ export const toggleDropdownVisibility = (bool) => ({
 })
 
 export const getCategories = () => dispatch => {
+  dispatch({ type: FOODS_LOADING })
   axios
     .get('https://caloriecounterapi.herokuapp.com/api/categories/')
     .then(res => {
@@ -257,6 +267,7 @@ export const createEmptyDayBasket = (date) => ({
 })
 
 export const foodsSearch = title => dispatch => {
+  dispatch({ type: FOODS_LOADING })
   axios
     .get(`https://caloriecounterapi.herokuapp.com/api/foods?search=${title}`)
     .then(res => {
