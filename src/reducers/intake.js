@@ -45,8 +45,8 @@ export const getUserRecomendedIntakeThunk = () => (dispatch, getState) => {
 
 export const createOrUpdateUserRecomendedIntakeThunk = (daily_calorie_intake) => (dispatch, getState) => {
   const username = getState().auth.user.username
-  const user = getState().auth.user.id
-  const body = { user, username, daily_calorie_intake }
+  // const user = getState().auth.user.id
+  const body = { username, daily_calorie_intake }
   if (getState().intake.exists) {
     const intakeId = getState().intake.intake.id
     axios.put(`https://caloriecounterapi.herokuapp.com/api/daily-calorie-intake/${intakeId}/`, body, addHeaderWithToken(getState))
