@@ -2,6 +2,7 @@
 
 .flex-cont-for-main-and-basket {
   @include header.flex-container;
+  align-items: flex-start;
   width: 100%;
   main {
     flex: 3;

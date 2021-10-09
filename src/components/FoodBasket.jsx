@@ -105,7 +105,6 @@ export function FoodBasket({ aside, main }) {
           {/* {basket.length > 0 ? basket.length === 1 ?
             Math.round(basket[0].weigthFactor * 100) :
             Math.round(basket.reduce((a, b) => a.weigthFactor * 100 + b.weigthFactor * 100)) : 0} g */}
-
           <button className="hide-busket-button"
             onClick={() => toggleBusketVisibility(aside, main)}>&#215;</button>
         </div>

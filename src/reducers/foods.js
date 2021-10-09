@@ -224,8 +224,9 @@ export const getCategories = () => dispatch => {
 }
 
 export const getUserFoodItems = (date) => (dispatch, getState) => {
+  console.log(date.id)
   axios
-    .get(`api/food-items?search=${date.id}`, addHeaderWithToken(getState))
+    .get(`https://caloriecounterapi.herokuapp.com/api/food-items?search=${date.id}`, addHeaderWithToken(getState))
     .then(res => {
       dispatch({
         type: CREATE_DAY_BASKET,

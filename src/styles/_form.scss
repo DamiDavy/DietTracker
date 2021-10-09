@@ -41,6 +41,7 @@
 
 .calendar-container {
   @include main-container();
+  background-color: header.$primary-background-color;
   padding: 1rem;
   max-width: 90%;
   height: calc(100vh - 7rem);
