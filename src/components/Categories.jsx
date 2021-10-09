@@ -23,12 +23,12 @@ export const Categories = React.memo(function Categories() {
         <h2>Categories</h2>
         {isLoading ? <img className="animated-gif" src={preloader} /> :
           <div className="categories-container">
-            {categories.map(category => <div key={category.id} className="category-container">
+            {categories ? categories.map(category => <div key={category.id} className="category-container">
               <Link to={`/app/category/${category.title}`} className="category-link">
                 <h4>{category.title}</h4>
               </Link>
               <img src={category.image} />
-            </div>)}
+            </div>) : null}
           </div>}
       </div>
     </div >

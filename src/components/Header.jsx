@@ -96,7 +96,8 @@ export function Header({ aside, main }) {
       onClick={() => hideHeaderDropDown()}></div>
     <header className="header-container">
       <div className="flex-for-small">
-        <Link className="header-link" to="/"><h2 className="header">Food Diary</h2></Link>
+        <Link className="header-link" to="/"><h2 className="header"
+          onClick={closeBaskeAndHeaderDropDown}>Food Diary</h2></Link>
         <div className="toggle-basket-button">
           <Link className="header-link" to="#"
             onClick={() => toggleBusketVisibility(aside, main)}>
