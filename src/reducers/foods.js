@@ -156,7 +156,7 @@ export const clearCurrentMonthInfoInFoods = () => ({ type: CLEAR_FOOD_STATE })
 export const setCalorieContent = (date) => (dispatch, getState) => {
   const foodItems = getState().foods[`${date.day}-${date.month}`]
   foodItems.forEach(item => {
-    axios.get(`https://caloriecounterapi.herokuapp.com/api/foods/${item.food}`)
+    axios.get(`https://caloriecounterapi.herokuapp.com/api/foods/${item.food}`, addHeaderWithToken(getState))
       .then(res => {
         dispatch({
           type: SET_CALORIE_CAPACITY,
@@ -225,7 +225,7 @@ export const getCategories = () => dispatch => {
 
 export const getUserFoodItems = (date) => (dispatch, getState) => {
   axios
-    .get(`https://caloriecounterapi.herokuapp.com/api/food-items?search=${date.id}`, addHeaderWithToken(getState))
+    .get(`api/food-items?search=${date.id}`, addHeaderWithToken(getState))
     .then(res => {
       dispatch({
         type: CREATE_DAY_BASKET,

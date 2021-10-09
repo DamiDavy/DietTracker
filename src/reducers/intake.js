@@ -45,7 +45,8 @@ export const getUserRecomendedIntakeThunk = () => (dispatch, getState) => {
 
 export const createOrUpdateUserRecomendedIntakeThunk = (daily_calorie_intake) => (dispatch, getState) => {
   const username = getState().auth.user.username
-  const body = { username, daily_calorie_intake }
+  const user = getState().auth.user.id
+  const body = { user, username, daily_calorie_intake }
   if (getState().intake.exists) {
     const intakeId = getState().intake.intake.id
     axios.put(`https://caloriecounterapi.herokuapp.com/api/daily-calorie-intake/${intakeId}/`, body, addHeaderWithToken(getState))
@@ -53,7 +54,8 @@ export const createOrUpdateUserRecomendedIntakeThunk = (daily_calorie_intake) =>
         dispatch(createSuccessMessage('Recomended Calorie Input Was Updated'))
         dispatch({
           type: SET_RECOMMENDED_INTAKE,
-          payload: res.data[0].daily_calorie_intake
+          payload: res.data.daily_calorie_intake
+          // payload: res.data[0].daily_calorie_intake
         })
       })
       .catch(error => {
@@ -66,7 +68,8 @@ export const createOrUpdateUserRecomendedIntakeThunk = (daily_calorie_intake) =>
         dispatch(createSuccessMessage('Recomended Calorie Input Was Created'))
         dispatch({
           type: SET_RECOMMENDED_INTAKE,
-          payload: res.data[0].daily_calorie_intake
+          payload: res.data.daily_calorie_intake
+          // payload: res.data[0].daily_calorie_intake
         })
       })
       .catch(error => {
