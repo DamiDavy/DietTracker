@@ -1,7 +1,7 @@
 @mixin alert {
   border: 1px solid gray;
   border-radius: 0.3rem;
-  color: rgb(80, 80, 80);
+  color: rgb(85, 84, 84);
   font-weight: bold;
   font-size: 1rem;
   padding: 1rem 2rem;
@@ -9,13 +9,13 @@
 
 .alert-info {
   @include alert();
-  background-color: rgb(216, 216, 211);
+  background-color: rgb(211, 211, 216);
 }
 .alert-success {
   @include alert();
-  background-color: rgb(186, 240, 186);
+  background-color: rgb(186, 240, 219);
 }
 .alert-error {
   @include alert();
-  background-color: rgb(253, 211, 186);
+  background-color: rgb(253, 200, 200);
 }

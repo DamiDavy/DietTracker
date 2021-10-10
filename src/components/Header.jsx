@@ -3,7 +3,7 @@ import React, { useEffect, useRef } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { logoutUser } from '../reducers/auth'
 import { getUserRecomendedIntakeThunk } from '../reducers/intake'
-import { Link } from 'react-router-dom'
+import { Link, NavLink } from 'react-router-dom'
 import '../styles/_header.scss';
 import { toggleBusketVisibility, toggleBusketVisibilityForWideScreenAndCalendar }
   from './common/toggleBusketVisibility'
@@ -76,11 +76,13 @@ export function Header({ aside, main }) {
   const basket = useSelector(state => state.foods.foodBasket)
 
   const guestButtons = <>
-    <div><Link className="header-link" onClick={closeBaskeAndHeaderDropDown} to={'/app/login'} >
-      Login</Link></div>
+    <div><NavLink className="header-link" onClick={closeBaskeAndHeaderDropDown} to={'/app/login'}
+      activeStyle={{ fontWeight: "bold" }}>
+      Login</NavLink></div>
     <div className="header-text">Or</div>
-    <div><Link className="header-link" onClick={closeBaskeAndHeaderDropDown} to={'/app/register'} >
-      Register</Link></div>
+    <div><NavLink className="header-link" onClick={closeBaskeAndHeaderDropDown} to={'/app/register'}
+      activeStyle={{ fontWeight: "bold" }}>
+      Register</NavLink></div>
   </>
 
   const authButtons = <>
@@ -117,16 +119,19 @@ export function Header({ aside, main }) {
       </div>
 
       <div>
-        <Link className="header-link link-visible-for-wide" to="/" ref={categoriesLink}
-          onClick={closeBaskeAndHeaderDropDown}>Categories</Link>
+        <NavLink className="header-link link-visible-for-wide"
+          to="/" ref={categoriesLink}
+          onClick={closeBaskeAndHeaderDropDown}>Categories</NavLink>
       </div>
       <div>
-        <Link className="header-link link-visible-for-wide" to="/app/days" ref={diaryLink}
-          onClick={closeBaskeAndHeaderDropDown}>Diary</Link>
+        <NavLink className="header-link link-visible-for-wide" to="/app/days" ref={diaryLink}
+          activeStyle={{ fontWeight: "bold" }}
+          onClick={closeBaskeAndHeaderDropDown}>Diary</NavLink>
       </div>
       <div>
-        <Link className="header-link link-visible-for-wide" to="/app/calorie-intake" ref={intakeLink}
-          onClick={closeBaskeAndHeaderDropDown}>Calorie Intake</Link>
+        <NavLink className="header-link link-visible-for-wide" to="/app/calorie-intake" ref={intakeLink}
+          activeStyle={{ fontWeight: "bold" }}
+          onClick={closeBaskeAndHeaderDropDown}>Calorie Intake</NavLink>
       </div>
 
       <div>
@@ -140,7 +145,6 @@ export function Header({ aside, main }) {
       <div className="auth-buttons-flex-container" ref={authLinks}>
         <div className="flex-for-small">{isAuth ? authButtons : guestButtons}</div>
       </div>
-
     </header>
   </>
   )

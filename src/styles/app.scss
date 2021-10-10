@@ -51,11 +51,20 @@
   height: 2rem;
 }
 
-.footer-text {
+@mixin footer-text() {
   position: absolute;
   bottom: 0.2rem;
-  left: 1rem;
   color: #663e60;
   font-size: 0.9rem;
   font-weight: bolder;
+}
+
+.footer-text {
+  @include footer-text();
+  left: 1rem;
+}
+
+.footer-img-info {
+  @include footer-text;
+  right: 1rem;
 }

@@ -41,7 +41,7 @@ export function Day({ num, days, showBasket, month, year }) {
     if (ratio <= 0.9 && ratio > 0.7) {
       return 'green-day'
     }
-    else if (ratio > 0.85 && ratio <= 1.05) {
+    else if (ratio > 0.9 && ratio <= 1.05) {
       return 'yellow-day'
     }
     else if (ratio > 1.05 && ratio <= 1.2) {

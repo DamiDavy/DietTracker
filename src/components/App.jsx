@@ -83,7 +83,10 @@ export function App() {
           <FoodBasket aside={aside} main={main} />
         </aside>
       </div>
-      <footer className="footer"><div className="footer-text">by DamiDami</div></footer>
+      <footer className="footer">
+        <div className="footer-text">by DamiDami</div>
+        <div className="footer-img-info">img: health.harvard.edu</div>
+      </footer>
     </div >
   )
 }

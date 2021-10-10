@@ -117,10 +117,12 @@
   @extend %item-container;
   position: relative;
   border-radius: 0.25rem;
-  background-color: white;
+  background-color: header.$primary-background-color;
+  // background-color: white;
   h6 {
     margin: 5% auto;
     text-align: center;
+    font-size: 0.9rem;
   }
   img {
     @include item-img();

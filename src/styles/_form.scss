@@ -44,7 +44,8 @@
   background-color: header.$primary-background-color;
   padding: 1rem;
   max-width: 90%;
-  height: calc(100vh - 7rem);
+  min-height: calc(100vh - 7rem);
+  position: relative;
 }
 
 @mixin text-input {
@@ -103,11 +104,11 @@ input[type='radio'] {
 }
 
 input[type='radio']:after {
-  width: 15px;
-  height: 15px;
+  width: 1.3rem;
+  height: 1.3rem;
   border-radius: 15px;
-  top: -5px;
-  left: -2px;
+  top: -0.2rem;
+  left: -0.3rem;
   position: relative;
   background-color: #d1d3d1;
   content: '';
@@ -117,11 +118,11 @@ input[type='radio']:after {
 }
 
 input[type='radio']:checked:after {
-  width: 15px;
-  height: 15px;
+  width: 1.3rem;
+  height: 1.3rem;
   border-radius: 15px;
-  top: -5px;
-  left: -2px;
+  top: -0.2rem;
+  left: -0.3rem;
   position: relative;
   background-color: header.$primary-color;
   content: '';

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import { v4 as uuidv4 } from 'uuid'
 
 import { useDispatch, useSelector } from 'react-redux'
@@ -97,11 +97,24 @@ export function Calendar({ aside, main }) {
     return str.charAt(0).toUpperCase() + str.slice(1);
   }
 
+  const legend = useRef(null)
+
+  const legendObject = {
+    "blue-day": "less than 70%",
+    "green-day": "70-90%",
+    "yellow-day": "90-105%",
+    "orange-day": "105-120%",
+    "red-day": "more than 120%"
+  }
+
   return (
     <div className="route-container">
       <div className="foods-categories-container">
         <h2>Calories Calendar</h2>
         <div className="calendar-container">
+          <button className="color-info-link" onClick={() => legend.current.scrollIntoView(top)}>?
+            <div className="color-info-tooltip">what day color means</div>
+          </button>
           <div className="month-title-and-bottons-container">
             <button onClick={showPreviousMonth} className="switch-month-btn">&#8249;</button>
             <h4>{`${capitalize(monthsTitles[month])} ${year}`}</h4>
@@ -117,6 +130,14 @@ export function Calendar({ aside, main }) {
               .map((index) =>
                 <Day key={`num${uuidv4()}`} num={index + 1} days={days}
                   showBasket={showBasket} month={month} year={year} />)}
+          </div>
+          <div className="legend-for-calendar" ref={legend}>
+            {Object.keys(legendObject).map(key => <>
+              <div className={`legend-day ${key}`}></div>
+              <span className="legend-text">
+                {`calorie intake is ${legendObject[key]} of recommended`}</span><br />
+            </>
+            )}
           </div>
         </div>
       </div>
