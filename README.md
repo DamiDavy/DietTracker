@@ -36,3 +36,7 @@ Layout and design are made with **SASS**. Responsiveness is provided by CSS Medi
 
 Frontend: React, Redux, Webpack, SASS  
 Backend: Django REST framework, knox
+
+### Demo
+
+![App Promo Gif](https://ibb.co/Xs5bCHR)
