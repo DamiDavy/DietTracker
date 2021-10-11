@@ -39,4 +39,4 @@ Backend: Django REST framework, knox
 
 ### Demo
 
-![App Promo Gif](https://ibb.co/Xs5bCHR)
+![App Promo Gif](https://i.ibb.co/ts24JRr/video-for-github-gif-online-video-cutter-com.gif)
