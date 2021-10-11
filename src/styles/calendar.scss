@@ -76,12 +76,6 @@
   padding: 0.2rem;
 }
 
-// $blue-day: rgb(194, 194, 248);
-// $green-day: rgb(129, 224, 129);
-// $yellow-day: rgb(255, 255, 134);
-// $orange-day: rgb(255, 222, 151);
-// $red-day: rgb(247, 159, 159);
-
 .blue-day {
   background-color: rgb(194, 194, 248);
 }
@@ -100,7 +94,7 @@
 
 .legend-day {
   display: inline-block;
-  margin: 0.5rem 0.5rem 0 2rem;
+  margin: 0.5rem 0.5rem 0 0;
   height: 0.8rem;
   width: 1.5rem;
   border: 0.5px solid rgb(206, 204, 204);
@@ -151,4 +145,8 @@
 
 .legend-text {
   font-size: 0.9rem;
+}
+
+.legend-for-calendar {
+  margin: 1rem;
 }

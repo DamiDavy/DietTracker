@@ -64,6 +64,7 @@ textarea:focus, input:focus{
   border-radius: 0 0 0.5rem 0.5rem;
   background-color: white;
   box-shadow: header.$shadow;
+  z-index: 40;
 }
 
 .search-result-link {
