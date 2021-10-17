@@ -22,11 +22,7 @@ export function Day({ num, days, showBasket, month, year }) {
 
   const loadedDays = useSelector(state => state.days.datesWereLoaded)
 
-  const intake = useSelector(state => {
-    if (state.intake.intake) {
-      return state.intake.intake.daily_calorie_intake
-    }
-  })
+  const intake = useSelector(state => state.intake.intake)
 
   useEffect(() => {
     if (foodItems && !loadedDays.includes(num)) {

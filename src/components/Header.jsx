@@ -16,11 +16,7 @@ export function Header({ aside, main }) {
 
   const isAuth = useSelector(state => state.auth.isAuth)
   const user = useSelector(state => state.auth.user)
-  const intake = useSelector(state => {
-    if (state.intake.intake) {
-      return state.intake.intake.daily_calorie_intake
-    }
-  })
+  const intake = useSelector(state => state.intake.intake)
 
   useEffect(() => {
     if (isAuth) {
