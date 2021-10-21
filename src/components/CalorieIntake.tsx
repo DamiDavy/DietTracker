@@ -1,11 +1,14 @@
-import React, { useState, useEffect } from 'react'
+import * as React from 'react'
+import { useState, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
+
 import { createOrUpdateUserRecomendedIntakeThunk } from '../reducers/intake'
-import '../styles/_form.scss';
+import './styles/_form.scss'
+import { stateType } from './store'
 
 export function CalorieIntake() {
 
-  const isAuth = useSelector(state => state.auth.isAuth)
+  const isAuth = useSelector((state: stateType) => state.auth.isAuth)
 
   const [height, setHeight] = useState('')
   const [weight, setWeight] = useState('')
@@ -22,7 +25,7 @@ export function CalorieIntake() {
 
   const dispatch = useDispatch()
 
-  function saveRecomendedIntake(num) {
+  function saveRecomendedIntake(num: number) {
     if (!sexChecked || !activityChecked) {
       setError('select gender and activity level')
     } else {
@@ -30,13 +33,13 @@ export function CalorieIntake() {
     }
   }
 
-  function validateNumberInput(name, value) {
+  function validateNumberInput(name: string, value: string) {
     if (name === 'height') setHeight(value)
     else if (name === 'weight') setWeight(value)
     else setAge(value)
   }
 
-  function handleRadioInputs(title, value) {
+  function handleRadioInputs(title: string, value: string) {
     if (title === 'sex') {
       setSexChecked(value)
     } else {
@@ -44,16 +47,16 @@ export function CalorieIntake() {
     }
   }
 
-  function inputValidationOnBlur(e, state) {
+  function inputValidationOnBlur(e: React.FocusEvent<HTMLInputElement>, state: number) {
     if (state <= 0) {
       setError('field must contain positive number')
       e.target.style.border = '2px solid #bf2c36'
     }
   }
 
-  function clearError(e) {
+  function clearError(e: React.MouseEvent<HTMLElement>) {
     setError('')
-    e.target.style.border = `1px solid gray`
+    e.currentTarget.style.border = `1px solid gray`
   }
 
   useEffect(() => {
@@ -89,17 +92,17 @@ export function CalorieIntake() {
           <input type="number" name="height" placeholder="height" value={height}
             className="number-input"
             onChange={e => validateNumberInput(e.target.name, e.target.value)}
-            onBlur={e => inputValidationOnBlur(e, height)}
+            onBlur={e => inputValidationOnBlur(e, +height)}
             onClick={e => clearError(e)} /><span>cm</span><br />
           <input type="number" name="weight" placeholder="weight" value={weight}
             className="number-input"
             onChange={e => validateNumberInput(e.target.name, e.target.value)}
-            onBlur={e => inputValidationOnBlur(e, weight)}
+            onBlur={e => inputValidationOnBlur(e, +weight)}
             onClick={e => clearError(e)} /><span>kg</span><br />
           <input type="number" name="age" placeholder="age" value={age}
             className="number-input"
             onChange={e => validateNumberInput(e.target.name, e.target.value)}
-            onBlur={e => inputValidationOnBlur(e, age)}
+            onBlur={e => inputValidationOnBlur(e, +age)}
             onClick={e => clearError(e)} /><span>years</span><br />
           <h5 className="header-inside-form">Gender</h5>
           <div className="radio-inputs">

@@ -1,22 +1,26 @@
-import React, { useEffect, useRef } from 'react'
-
+import { useEffect, useRef } from 'react'
+import * as React from 'react'
 import { useDispatch, useSelector } from 'react-redux'
+import { Link, NavLink } from 'react-router-dom'
+
 import { logoutUser } from '../reducers/auth'
 import { getUserRecomendedIntakeThunk } from '../reducers/intake'
-import { Link, NavLink } from 'react-router-dom'
-import '../styles/_header.scss';
 import { toggleBusketVisibility, toggleBusketVisibilityForWideScreenAndCalendar }
   from './common/toggleBusketVisibility'
-import { DROP_CALENDAR_STATE_ON_LOGOUT } from '../reducers/days'
-import { DROP_FOODS_STATE_ON_LOGOUT } from '../reducers/foods'
+import { dropCalendarOnLogout } from '../reducers/days'
+import { dropFoodStateOnLogout } from '../reducers/foods'
+import { RefObjectsAsProps } from './private/Calendar'
+import './styles/_header.scss'
 
-export function Header({ aside, main }) {
+import { stateType } from './store'
+
+export const Header: React.FC<RefObjectsAsProps> = ({ aside, main }) => {
 
   const dispatch = useDispatch()
 
-  const isAuth = useSelector(state => state.auth.isAuth)
-  const user = useSelector(state => state.auth.user)
-  const intake = useSelector(state => state.intake.intake)
+  const isAuth = useSelector((state: stateType) => state.auth.isAuth)
+  const user = useSelector((state: stateType) => state.auth.user)
+  const intake = useSelector((state: stateType) => state.intake.intake)
 
   useEffect(() => {
     if (isAuth) {
@@ -60,8 +64,8 @@ export function Header({ aside, main }) {
 
   function logoutAndDropState() {
     dispatch(logoutUser())
-    dispatch({ type: DROP_CALENDAR_STATE_ON_LOGOUT })
-    dispatch({ type: DROP_FOODS_STATE_ON_LOGOUT })
+    dispatch(dropCalendarOnLogout())
+    dispatch(dropFoodStateOnLogout())
     if (window.innerWidth <= 700) {
       hideHeaderDropDown()
       aside.current.style.display = 'none'
@@ -69,7 +73,7 @@ export function Header({ aside, main }) {
     }
   }
 
-  const basket = useSelector(state => state.foods.foodBasket)
+  const basket = useSelector((state: stateType) => state.foods.foodBasket)
 
   const guestButtons = <>
     <div><NavLink className="header-link" onClick={closeBaskeAndHeaderDropDown} to={'/app/login'}
@@ -111,7 +115,6 @@ export function Header({ aside, main }) {
           <Link className="header-link" to="#"
             onClick={toggleLinksVisibility}>&#9776;</Link>
         </div>
-
       </div>
 
       <div>

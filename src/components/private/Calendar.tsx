@@ -1,48 +1,50 @@
-import React, { useEffect, useRef, useState } from 'react'
+import * as React from 'react'
+import { useEffect, useRef, useState } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
 import { v4 as uuidv4 } from 'uuid'
 
-import { useDispatch, useSelector } from 'react-redux'
 import { clearCurrentMonthInfoInDays, createOrGetDay, searchDays, setCalendarIsRendered } from '../../reducers/days'
-import { Day } from './Day'
 import { clearCurrentMonthInfoInFoods, clearFoodBusket, createEmptyDayBasket } from '../../reducers/foods'
-import '../../styles/calendar.scss'
+import { Day } from './Day'
+import '../styles/calendar.scss'
+
+import { stateType } from '../store'
 
 const weekDays = ['mo', 'tu', 'we', 'th', 'fr', 'sa', 'su']
 export const monthsTitles = ['january', 'february', 'march', 'april', 'may', 'june', 'july',
   'august', 'september', 'october', 'november', 'december']
 
-const weekDayInFormat = (day) => {
+const weekDayInFormat = (day: number) => {
   if (day === 0) return 6
   else return day - 1
 }
 
-const lastMonthDay = (year, month) => {
+const lastMonthDay = (year: number, month: number) => {
   const firstDay = new Date(year, month)
   firstDay.setMonth(firstDay.getMonth() + 1)
   firstDay.setDate(0)
   return firstDay.getDate()
 }
 
-const getMonthFirstDayInWeek = (year, month) => {
+const getMonthFirstDayInWeek = (year: number, month: number) => {
   const firstDay = new Date(year, month)
   return weekDayInFormat(firstDay.getDay())
 }
 
-export const monthInFormat = (month) => {
-  return month + 1 < 10 ? `0${month + 1}` : month + 1
+export const monthInFormat = (month: number | string): string => {
+  return +month + 1 < 10 ? `0${+month + 1}` : +month + 1 + ''
 }
 
-export function Calendar({ aside, main }) {
+export const Calendar: React.FC<RefObjectsAsProps> = ({ aside, main }) => {
 
   const dispatch = useDispatch()
 
   const now = new Date()
 
-  const calendarIsRendered = useSelector(state => state.days.calendarIsRendered)
+  const calendarIsRendered = useSelector((state: stateType) => state.days.calendarIsRendered)
 
   useEffect(() => {
     if (!calendarIsRendered) {
-      // dispatch(createOrGetDay(now.getDate(), monthInFormat(now.getMonth()), now.getFullYear()))
       dispatch(setCalendarIsRendered())
     }
   }, [])
@@ -50,9 +52,9 @@ export function Calendar({ aside, main }) {
   const [year, setYear] = useState(now.getFullYear())
   const [month, setMonth] = useState(now.getMonth())
 
-  function showBasket(day, month, year) {
+  function showBasket(day: number, month: string, year: number) {
     dispatch(createOrGetDay(day, month, year))
-    dispatch(createEmptyDayBasket({ day, month }))
+    dispatch(createEmptyDayBasket(day, month))
     dispatch(clearFoodBusket())
     aside.current.style.display = 'block';
     if (window.innerWidth <= 700) {
@@ -91,9 +93,9 @@ export function Calendar({ aside, main }) {
       return prev + 1
     })
   }
-  const days = useSelector(state => state.days.days)
+  const days = useSelector((state: stateType) => state.days.days)
 
-  function capitalize(str) {
+  function capitalize(str: string) {
     return str.charAt(0).toUpperCase() + str.slice(1);
   }
 
@@ -132,15 +134,22 @@ export function Calendar({ aside, main }) {
                   showBasket={showBasket} month={month} year={year} />)}
           </div>
           <div className="legend-for-calendar" ref={legend}>
-            {Object.keys(legendObject).map(key => <>
-              <div className={`legend-day ${key}`}></div>
-              <span className="legend-text">
-                {`calorie intake is ${legendObject[key]} of recommended`}</span><br />
-            </>
-            )}
+            {(Object.keys(legendObject) as Array<keyof typeof legendObject>).map(key => {
+              return <>
+                <div className={`legend-day ${key}`}></div>
+                <span className="legend-text">
+                  {`calorie intake is ${legendObject[key]} of recommended`}</span><br />
+              </>
+            })
+            }
           </div>
         </div>
       </div>
     </div >
   )
+}
+
+export interface RefObjectsAsProps {
+  aside: React.MutableRefObject<HTMLElement | null>,
+  main: React.MutableRefObject<HTMLElement | null>,
 }

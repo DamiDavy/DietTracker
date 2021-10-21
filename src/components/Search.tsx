@@ -1,15 +1,19 @@
-import React, { useState } from 'react'
-import { useSelector } from 'react-redux';
-import { useDispatch } from 'react-redux'
-import { Link } from 'react-router-dom';
-import { foodsSearch, toggleDropdownVisibility } from '../reducers/search'
-import '../styles/search-form.scss';
+import { useState } from 'react'
+import * as React from 'react'
+import { useSelector, useDispatch } from 'react-redux'
+import { Link } from 'react-router-dom'
 
-export function Search({ aside, main }) {
+import { foodsSearch, toggleDropdownVisibility } from '../reducers/search'
+import { RefObjectsAsProps } from './private/Calendar'
+import { stateType } from './store'
+import { FoodType } from '../reducers/search'
+import './styles/search-form.scss'
+
+export const Search: React.FC<RefObjectsAsProps> = ({ aside, main }) => {
   const [title, setTitle] = useState('')
 
-  const foods = useSelector(state => state.search.foods)
-  const dropDownIsVisible = useSelector(state => state.search.dropDownIsVisible)
+  const foods = useSelector((state: stateType) => state.search.foods)
+  const dropDownIsVisible = useSelector((state: stateType) => state.search.dropDownIsVisible)
     && (foods && foods.length)
 
   const dispatch = useDispatch()
@@ -44,7 +48,7 @@ export function Search({ aside, main }) {
             <button type="button" className="clear-input"
               onClick={() => setTitle('')}>&#215;</button>
             {dropDownIsVisible ? <div className="search-dropdown">
-              {foods.map(food => <div key={food.id}><Link className="search-result-link"
+              {foods.map((food: FoodType) => <div key={food.id}><Link className="search-result-link"
                 onClick={onClickFoodDetailLink}
                 to={`/app/food/${food.title}`}>{food.title}</Link></div>)}
             </div> : null}

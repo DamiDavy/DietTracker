@@ -2,7 +2,7 @@ const path = require('path')
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
-  entry: './src/index.js',
+  entry: './src/index.tsx',
   output: {
     path: __dirname + '/build',
     publicPath: '/',
@@ -21,7 +21,7 @@ module.exports = {
     port: 9000,
   },
   resolve: {
-    extensions: ['.jsx', '...'],
+    extensions: ['.tsx', '.ts', '.js', '.jsx', 'scss'],
     alias: {
       '@models': path.resolve(__dirname, 'src/models'),
       '@': path.resolve(__dirname, 'src'),
@@ -37,12 +37,13 @@ module.exports = {
         test: /\.s[ca]ss$/i,
         use: ['style-loader', 'css-loader', 'sass-loader'],
       },
+
       {
         test: /\.(png|jpe?g|svg|gif)$/,
         use: ['file-loader']
       },
       {
-        test: /\.js$/,
+        test: /\.jsx$/,
         exclude: /node-modules/,
         loader: "babel-loader",
         options: {
@@ -52,15 +53,21 @@ module.exports = {
         }
       },
       {
-        test: /\.ts$/,
-        exclude: /node-modules/,
-        loader: "babel-loader",
-        options: {
-          presets: [
-            "@babel/preset-env", "@babel/preset-typescript"
-          ]
-        }
+        test: /\.tsx?$/,
+        use: 'ts-loader',
+        exclude: /node_modules/,
       },
+      // {
+      //   test: /\.tsx?$/,
+      //   use: 'ts-loader',
+      //   exclude: /node-modules/,
+      //   loader: "babel-loader",
+      //   options: {
+      //     presets: [
+      //       "@babel/preset-env", "@babel/preset-typescript"
+      //     ]
+      //   }
+      // },
       {
         test: /\.jsx$/,
         exclude: /node-modules/,
@@ -73,9 +80,9 @@ module.exports = {
       }
     ]
   },
-  plugins: [
-    new HtmlWebpackPlugin({
-      template: path.resolve('./index.html'),
-    }),
-  ]
+  // plugins: [
+  //   new HtmlWebpackPlugin({
+  //     template: path.resolve('./index.html'),
+  //   }),
+  // ]
 }

@@ -1,13 +1,17 @@
-import React, { useState } from 'react'
+import * as React from 'react'
+import { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Redirect } from 'react-router'
 import { Link } from 'react-router-dom'
+
 import { registerUser } from '../../reducers/auth'
-import '../../styles/_form.scss';
+import '../styles/_form.scss'
+
+import { stateType } from '../store'
 
 export const Register = () => {
 
-  const isAuth = useSelector(state => state.auth.isAuth)
+  const isAuth = useSelector((state: stateType) => state.auth.isAuth)
 
   const [login, setLogin] = useState('')
   const [password, setPassword] = useState('')
@@ -18,47 +22,47 @@ export const Register = () => {
 
   const dispatch = useDispatch()
 
-  const submitRegistrationForm = (e) => {
+  const submitRegistrationForm = (e: React.MouseEvent<HTMLElement>) => {
     dispatch(registerUser(login, email, password))
     e.preventDefault()
   }
 
-  const inputValidationOnBlur = (e, type, title) => {
+  const inputValidationOnBlur = (e: React.FocusEvent<HTMLInputElement>, type: string, title: string) => {
     if (type.length < 4) {
       setError(`${title} must contain at least four letters`)
       e.target.style.border = '2px solid #bf2c36'
     }
   }
 
-  const inputValidationOnKeyUp = (e, type, title) => {
+  const inputValidationOnKeyUp = (e: React.KeyboardEvent<HTMLInputElement>, type: string, title: string) => {
     if (type.length > 3) {
       setError('')
-      e.target.style.border = '1px solid gray'
+      e.currentTarget.style.border = '1px solid gray'
     }
   }
 
-  const equalityPasswordsValidation = (e) => {
+  const equalityPasswordsValidation = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (password !== passwordRepeat) {
       setError('passwords are not equal')
-      e.target.style.border = '2px solid #bf2c36'
+      e.currentTarget.style.border = '2px solid #bf2c36'
     }
     else {
       setError('')
-      e.target.style.border = '1px solid gray'
+      e.currentTarget.style.border = '1px solid gray'
     }
   }
 
   const re = /^[^@]+@[^@]+.[^@]+$/
-  const emailValidationOnBlur = (e) => {
+  const emailValidationOnBlur = (e: React.FocusEvent<HTMLInputElement>) => {
     if (!re.test(email)) {
       setError('invalid email address')
       e.target.style.border = '2px solid #bf2c36'
     }
   }
-  const emailValidationOnKeyUp = (e) => {
+  const emailValidationOnKeyUp = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (re.test(email)) {
       setError('')
-      e.target.style.border = '1px solid gray'
+      e.currentTarget.style.border = '1px solid gray'
     }
   }
 

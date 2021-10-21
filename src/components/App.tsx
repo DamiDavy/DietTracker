@@ -1,24 +1,44 @@
-import React, { useEffect, useRef } from 'react'
-import { Route, Switch, Redirect } from 'react-router-dom'
+import * as React from 'react'
+import { useEffect, useRef } from 'react'
+import { Route, Switch, BrowserRouter } from 'react-router-dom'
+import { useDispatch, useSelector, Provider } from 'react-redux'
+import * as Alert from 'react-alert'
+import { useAlert, positions, Provider as AlertProvider } from 'react-alert'
+
 import { Login } from './auth/Login'
 import { Register } from './auth/Register'
 import { PrivateRoute } from './common/PrivateRoute'
-import { useAlert } from 'react-alert'
-
 import { Header } from './Header'
 import { Calendar } from './private/Calendar'
-import { loadUser } from '../reducers/auth'
-import { useDispatch, useSelector } from 'react-redux'
 import { Search } from './Search'
 import { Category } from './Category'
 import { Food } from './Food'
 import { Categories } from './Categories'
 import { FoodBasket } from './FoodBasket'
-import { toggleDropdownVisibility } from '../reducers/search'
 import { CalorieIntake } from './CalorieIntake'
-import '../styles/app.scss';
-import foodsimg from '../assets/vegetables.jpg'
 import { NotFound } from './NotFound'
+
+import { loadUser } from '../reducers/auth'
+import { toggleDropdownVisibility } from '../reducers/search'
+import './styles/app.scss'
+import './styles/index.scss'
+
+import store from './store'
+import { stateType } from './store'
+// @ts-ignore 
+import foodsimg from '../assets/vegetables.jpg'
+
+const options = {
+  position: positions.TOP_CENTER,
+  timeout: 3000,
+  offset: '30px'
+}
+
+const AlertTemplate = ({ style, options, message }: Alert.AlertComponentPropsWithStyle) => (
+  <div style={style} className={`alert-${options.type}`}>
+    {message}
+  </div>
+)
 
 export function App() {
 
@@ -28,8 +48,8 @@ export function App() {
     dispatch(loadUser())
   }, [])
 
-  const successMessage = useSelector(state => state.success.message)
-  const errorMessage = useSelector(state => state.errors.message)
+  const successMessage = useSelector((state: stateType) => state.success.message)
+  const errorMessage = useSelector((state: stateType) => state.errors.message)
 
   const alert = useAlert()
 
@@ -49,8 +69,12 @@ export function App() {
     }
   }, [errorMessage])
 
-  const main = useRef(null);
-  const aside = useRef(null);
+  const main = useRef<HTMLElement | null>(null);
+  const aside = useRef<HTMLElement | null>(null);
+
+  useEffect(() => {
+    console.log(main)
+  }, [main])
 
   function hideDropdowns() {
     dispatch(toggleDropdownVisibility(false))
@@ -88,5 +112,17 @@ export function App() {
         <div className="footer-img-info">img: health.harvard.edu</div>
       </footer>
     </div >
+  )
+}
+
+export const AppWithWrap = () => {
+  return (
+    <Provider store={store}>
+      <AlertProvider template={AlertTemplate} {...options}>
+        <BrowserRouter>
+          <App />
+        </BrowserRouter>
+      </AlertProvider>
+    </Provider>
   )
 }

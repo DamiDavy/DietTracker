@@ -1,7 +1,7 @@
-import React from 'react'
-import '../styles/_form.scss';
+import * as React from 'react'
 import { Link } from 'react-router-dom'
-import '../styles/_food-basket.scss';
+import './styles/_food-basket.scss'
+import './styles/_form.scss'
 
 export function NotFound() {
   return (
