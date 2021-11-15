@@ -11,6 +11,10 @@ Here are my credentials for [log in](https://canthin.netlify.app/app/login):
 login – dami  
 password - MrPresident14?6.  
 
+### Demo
+
+![App Promo Gif](build/gif-for-github.gif.gif)
+
 ### Distinctiveness and Complexity
 
 This is single-page application for keeping track of the diet throughout the day and throughout the months.
@@ -36,7 +40,3 @@ Layout and design are made with **SASS**. Responsiveness is provided by CSS Medi
 
 Frontend: React, Redux, Webpack, SASS  
 Backend: Django REST framework, knox
-
-### Demo
-
-![App Promo Gif](build/gif-for-github.gif.gif)
