@@ -3,13 +3,17 @@
 Frontend is hosted on [netlify](https://canthin.netlify.app)  
 Backend is hosted on [heroku]( https://caloriecounterapi.herokuapp.com)
 
-**Backend Repository**: <https://github.com/DamiDavy/diet-tracker-backend>
+**Backend Repository**: <https://github.com/DamiDavy/DietTrackerAPI>
 
 Registration is available [here](https://canthin.netlify.app/app/register).  
 Or.  
 Here are my credentials for [log in](https://canthin.netlify.app/app/login):  
 login – dami  
-password - MrPresident14?6.  
+password - MrPresident14?6  
+
+### Demo
+
+![App Promo Gif](build/gif-for-github.gif.gif)
 
 ### Distinctiveness and Complexity
 
@@ -36,7 +40,3 @@ Layout and design are made with **SASS**. Responsiveness is provided by CSS Medi
 
 Frontend: React, Redux, Webpack, SASS  
 Backend: Django REST framework, knox
-
-### Demo
-
-![App Promo Gif](build/gif-for-github.gif.gif)
