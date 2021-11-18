@@ -9,7 +9,7 @@ Registration is available [here](https://canthin.netlify.app/app/register).
 Or.  
 Here are my credentials for [log in](https://canthin.netlify.app/app/login):  
 login – dami  
-password - MrPresident14?6.  
+password - MrPresident14?6  
 
 ### Demo
 
