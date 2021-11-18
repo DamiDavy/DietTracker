@@ -8,7 +8,7 @@
   padding-top: 2rem;
   width: 30rem;
   max-width: 90%;
-  height: calc(100vh - 4rem);
+  height: calc(110vh - 4rem);
   margin: 0 auto;
   background-color: rgba(247, 247, 247, 0.8);
   border: none;
@@ -23,7 +23,7 @@
       font-size: 1.4rem;
     }
   }
-  @media (max-height: 800px) {
+  @media (max-height: 600px) {
     height: calc(150vh - 4rem);
   }
 }
