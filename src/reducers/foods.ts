@@ -182,6 +182,7 @@ export function getCategories(categories: CategoryType[]) {
   return createAction(GET_CATEGORIES, 'payload', categories)
 }
 export function createDayBasket(date: DayType, foodItems: foodItemType[]) {
+  console.log(date, foodItems)
   return createAction(CREATE_DAY_BASKET, 'payload', { date, foodItems })
 }
 
